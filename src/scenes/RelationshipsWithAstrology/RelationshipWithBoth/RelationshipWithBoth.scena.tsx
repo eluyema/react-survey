@@ -21,7 +21,7 @@ const RelationshipWithBoth = () => {
   const attributes = useSelector(attributesSelector);
 
   const getPreaperedText = () => {
-    const zodiac = attributes.zodiac.charAt(0).toUpperCase() + attributes.zodiac.slice(1);
+    const zodiac = attributes.zodiac?.charAt(0).toUpperCase() + attributes.zodiac?.slice(1);
     return stage.text.replace("{Zodiac}", zodiac);
   };
 

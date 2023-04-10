@@ -61,7 +61,7 @@ const RelationshipProblemQuestion = () => {
   };
 
   const getPreaperedText = () => {
-    const gender = attributes.gender.charAt(0).toUpperCase() + attributes.gender.slice(1);
+    const gender = attributes.gender?.charAt(0).toUpperCase() + attributes.gender?.slice(1);
     let text = question.text.replace("{Gender}", gender);
     text = text.replace("{age}", attributes.age);
     text = text.replace(
