@@ -3,10 +3,10 @@ import SurveyQuestion from "@/features/activeSurvey/components/SurveyQuestion/Su
 import { SurveyQuestionData } from "@/common/types/survey/SurveyQuestionData";
 import { useNavigate } from "react-router-dom";
 import { moveOnStage } from "@/features/activeSurvey/activeSurveySlice";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/providers/ReduxProvider/rootReducer";
+import { useDispatch } from "react-redux";
 import { slugs } from "@/common/constants/slugs.contant";
 import { basePathnames } from "@/common/constants/pathnames.constant";
+
 const question: SurveyQuestionData = {
   stageId: "8",
   slug: slugs.relationshipsWithAstrology.makeDecisions,

@@ -1,6 +1,6 @@
 import React from "react";
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider.provider";
-import ReduxProvider from "../ReduxProvider/ReduxProvider.provider";
+import ReduxProvider from "@/providers/ReduxProvider/ReduxProvider.provider";
 
 interface AppProviderProps {
   children: React.ReactNode;

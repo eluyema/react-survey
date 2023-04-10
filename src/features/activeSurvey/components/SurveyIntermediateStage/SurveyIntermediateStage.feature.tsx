@@ -11,8 +11,11 @@ import { ReactComponent as HeartAndHeadIcon } from "@/assets/heart-and-head.svg"
 import Button from "@/ui/Button/Button.ui";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { moveBack, moveOnStage } from "../../activeSurveySlice";
-import { RootState } from "@/providers/ReduxProvider/rootReducer";
+import {
+  moveBack,
+  moveOnStage,
+  passedStageSelector,
+} from "@/features/activeSurvey/activeSurveySlice";
 
 interface SurveyIntermediateStageProps {
   stageData: SurveyStageData;
@@ -29,7 +32,7 @@ const SurveyIntermediateStage: React.FC<SurveyIntermediateStageProps> = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const passedStages = useSelector((state: RootState) => state.activeSurvey.passedStages);
+  const passedStages = useSelector(passedStageSelector);
 
   const { footerText } = stageData;
 

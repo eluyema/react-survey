@@ -1,6 +1,7 @@
 import { PassedSurveyStage } from "@/common/types/survey/PassedStage";
+import { RootState } from "@/providers/ReduxProvider/rootReducer";
 import { removeFields } from "@/utils/object/removeFields.utils";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AddStageAction {
   slug: string;
@@ -58,5 +59,15 @@ export const activeSurveySlice = createSlice({
 });
 
 export const { moveBack, moveOnStage, clearCurrentSurveyData } = activeSurveySlice.actions;
+
+export const attributesSelector = createSelector(
+  (state: RootState) => state.activeSurvey,
+  (activeSurvey) => activeSurvey.attributes
+);
+
+export const passedStageSelector = createSelector(
+  (state: RootState) => state.activeSurvey,
+  (activeSurvey) => activeSurvey.passedStages
+);
 
 export default activeSurveySlice.reducer;

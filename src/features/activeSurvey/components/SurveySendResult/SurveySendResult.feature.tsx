@@ -1,6 +1,6 @@
 import { SurveyStageData } from "@/common/types/survey/SurveyStageData";
 import React from "react";
-import SurveyContainer from "../SurveyContainer/SurveyContainer.feature";
+import SurveyContainer from "@/features/activeSurvey/components/SurveyContainer/SurveyContainer.feature";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
@@ -16,7 +16,7 @@ import Button from "@/ui/Button/Button.ui";
 import SendResultPolicy from "./components/SendResultPolicy/SendResultPolicy";
 import { surveyStagesToResult } from "@/utils/mapper/surveyStagesToResult.mapper";
 import { useSelector } from "react-redux";
-import { RootState } from "@/providers/ReduxProvider/rootReducer";
+import { passedStageSelector } from "@/features/activeSurvey/activeSurveySlice";
 
 interface SurveySendResultProps {
   stageData: SurveyStageData;
@@ -35,7 +35,7 @@ const validationSchema = Yup.object({
 const SurveySendResult: React.FC<SurveySendResultProps> = ({ stageData, initSlug, basepath }) => {
   const { footerText, text } = stageData;
 
-  const passedStages = useSelector((state: RootState) => state.activeSurvey.passedStages);
+  const passedStages = useSelector(passedStageSelector);
 
   return (
     <SurveyContainer initSlug={initSlug} basepath={basepath} footerText={footerText}>

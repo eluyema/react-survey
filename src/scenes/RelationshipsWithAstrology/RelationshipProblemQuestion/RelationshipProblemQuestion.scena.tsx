@@ -2,11 +2,10 @@ import React from "react";
 import SurveyQuestion from "@/features/activeSurvey/components/SurveyQuestion/SurveyQuestion.feature";
 import { SurveyQuestionData } from "@/common/types/survey/SurveyQuestionData";
 import { useNavigate } from "react-router-dom";
-import { moveOnStage } from "@/features/activeSurvey/activeSurveySlice";
+import { attributesSelector, moveOnStage } from "@/features/activeSurvey/activeSurveySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { slugs } from "@/common/constants/slugs.contant";
 import { basePathnames } from "@/common/constants/pathnames.constant";
-import { RootState } from "@/providers/ReduxProvider/rootReducer";
 
 const question: SurveyQuestionData = {
   stageId: "6",
@@ -41,7 +40,7 @@ const RelationshipProblemQuestion = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const attributes = useSelector((state: RootState) => state.activeSurvey.attributes);
+  const attributes = useSelector(attributesSelector);
 
   const onSubmitQuestion = (value: unknown, nextSlug: string) => {
     if (typeof value !== "string") {

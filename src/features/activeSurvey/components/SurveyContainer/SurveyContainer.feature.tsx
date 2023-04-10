@@ -17,8 +17,7 @@ import { ReactComponent as BackWhiteIcon } from "@/assets/back-white.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/providers/ReduxProvider/rootReducer";
 import { useNavigate } from "react-router-dom";
-import { moveBack } from "../../activeSurveySlice";
-
+import { moveBack, passedStageSelector } from "@/features/activeSurvey/activeSurveySlice";
 interface SurveyContainerProps {
   darkMode?: boolean;
   footerText?: string | string[];
@@ -36,14 +35,11 @@ const SurveyContainer: React.FC<SurveyContainerProps> = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const footerStrings = Array.isArray(footerText) ? footerText : [footerText];
-  const passedStages = useSelector((state: RootState) => state.activeSurvey.passedStages);
+  const passedStages = useSelector(passedStageSelector);
   const showBackButton = !!passedStages.length;
-  const onBackClick = () => {
-    const lastStage = passedStages[passedStages.length - 1];
-    dispatch(moveBack());
-    navigate(`${basepath}/${lastStage.slug}`, { replace: true });
-  };
+
   useEffect(() => {
     const initPath = basepath + "/" + initSlug;
     console.log(initPath, location.pathname, initPath === location.pathname);
@@ -54,6 +50,12 @@ const SurveyContainer: React.FC<SurveyContainerProps> = ({
       navigate(`${basepath}/${initSlug}`, { replace: true });
     }
   }, [passedStages]);
+
+  const onBackClick = () => {
+    const lastStage = passedStages[passedStages.length - 1];
+    dispatch(moveBack());
+    navigate(`${basepath}/${lastStage.slug}`, { replace: true });
+  };
 
   return (
     <SurveyContainerWrapper gradient={darkMode}>

@@ -4,7 +4,7 @@ import SurveyIntermediateStage from "@/features/activeSurvey/components/SurveyIn
 import { slugs } from "@/common/constants/slugs.contant";
 import { basePathnames } from "@/common/constants/pathnames.constant";
 import { useSelector } from "react-redux";
-import { RootState } from "@/providers/ReduxProvider/rootReducer";
+import { attributesSelector } from "@/features/activeSurvey/activeSurveySlice";
 
 const stage: SurveyStageData = {
   stageId: "11",
@@ -18,7 +18,7 @@ const stage: SurveyStageData = {
 };
 
 const RelationshipWithHead = () => {
-  const attributes = useSelector((state: RootState) => state.activeSurvey.attributes);
+  const attributes = useSelector(attributesSelector);
 
   const getPreaperedText = () => {
     const zodiac = attributes.zodiac.charAt(0).toUpperCase() + attributes.zodiac.slice(1);
