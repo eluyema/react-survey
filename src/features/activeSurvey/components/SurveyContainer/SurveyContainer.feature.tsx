@@ -42,7 +42,6 @@ const SurveyContainer: React.FC<SurveyContainerProps> = ({
 
   useEffect(() => {
     const initPath = basepath + "/" + initSlug;
-    console.log(initPath, location.pathname, initPath === location.pathname);
     if (location.pathname === initPath) {
       return;
     }

@@ -19,12 +19,10 @@ function Select({ options, value, name, placeholder, disabled, onChange }: Selec
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectOpen = () => {
-    console.log(true);
     setIsOpen(true);
   };
 
   const handleSelectClose = () => {
-    console.log(false);
     setIsOpen(false);
   };
 

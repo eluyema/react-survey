@@ -39,7 +39,6 @@ const QuestionDateSelection: React.FC<QuestionDateSelectionProps> = ({
       validationSchema={validationSchema}
       onSubmit={(values) => {
         const date = new Date(+values.year, +values.month - 1, +values.day);
-        console.log("!!!");
         onSubmitQuestion(date, nextSlug);
       }}
     >
