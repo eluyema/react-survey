@@ -72,11 +72,11 @@ const Routing = () => {
               path={slugs.relationshipsWithAstrology.sendGaidancePlan}
               element={<SendGaidancePlan />}
             />
-            {/* <Route path="*" element={<Navigate to={baseSurvey} replace />} /> */}
+            <Route path="*" element={<Navigate to={baseSurvey} replace />} />
           </Route>
-          {/* <Route path="*" element={<Navigate to={baseSurvey} replace />} /> */}
+          <Route path="*" element={<Navigate to={baseSurvey} replace />} />
         </Route>
-        {/* <Route path="*" element={<Navigate to={baseSurvey} replace />} /> */}
+        <Route path="*" element={<Navigate to={baseSurvey} replace />} />
       </Routes>
     </BrowserRouter>
   );
