@@ -1,29 +1,62 @@
+import { PassedSurveyStage } from "@/common/types/survey/PassedStage";
+import { removeFields } from "@/utils/object/removeFields.utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface AddStageAction {
+  slug: string;
+  stageId: string;
+  isQuestion: boolean;
+  attributes: Record<string, string>;
+  modifiedAttributes: string[];
+  value?: unknown;
+}
+
 interface ActiveSurveyState {
-  value: number;
+  passedStages: PassedSurveyStage[];
+  attributes: Record<string, string>;
 }
 
 const initialState: ActiveSurveyState = {
-  value: 0,
+  passedStages: [],
+  attributes: {},
 };
 
 export const activeSurveySlice = createSlice({
   name: "activeSurveySlice",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    moveBack: (state) => {
+      const passedStage = state.passedStages.pop();
+      const modifiedAttributes = passedStage?.modifiedAttributes;
+      if (modifiedAttributes) {
+        state.attributes = removeFields(state.attributes, modifiedAttributes) as Record<
+          string,
+          string
+        >;
+      }
     },
-    decrement: (state) => {
-      state.value -= 1;
+    moveOnStage: (state, action: PayloadAction<AddStageAction>) => {
+      const { slug, stageId, isQuestion, attributes, modifiedAttributes, value } = action.payload;
+
+      const passedStage: PassedSurveyStage = {
+        stageId,
+        slug,
+        modifiedAttributes,
+        isQuestion,
+        value,
+      };
+
+      state.passedStages.push(passedStage);
+
+      state.attributes = { ...state.attributes, ...attributes };
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    clearCurrentSurveyData: (state) => {
+      state.passedStages = [];
+      state.attributes = {};
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = activeSurveySlice.actions;
+export const { moveBack, moveOnStage, clearCurrentSurveyData } = activeSurveySlice.actions;
 
 export default activeSurveySlice.reducer;

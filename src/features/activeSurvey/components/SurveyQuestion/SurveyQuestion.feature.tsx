@@ -5,30 +5,49 @@ import {
   SurveyQuestionInputSection,
   SurveyQuestionContainer,
   SurveyQuestionText,
-  SurveyQuestionSubmitSection,
 } from "./SurveyQuestion.styles";
-import Button from "@/ui/Button/Button.ui";
 import QuestionChoices from "./components/QuestionChoices/QuestionChoices";
+import QuestionDateSelection from "./components/QuestionDateSelection/QuestionDateSelection";
 
 interface SurveyQuestionProps {
   question: SurveyQuestionData;
+  onSubmitQuestion: (value: unknown, nextSlug: string) => void;
+  initSlug: string;
+  basepath: string;
+  preparedText: string;
   darkMode?: boolean;
 }
 
-const SurveyQuestion: React.FC<SurveyQuestionProps> = ({ question, darkMode = false }) => {
-  const { footerText, text, questionType, variants } = question;
+const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
+  question,
+  initSlug,
+  basepath,
+  preparedText,
+  onSubmitQuestion,
+  darkMode = false,
+}) => {
+  const { footerText, questionType, variants } = question;
 
   return (
-    <SurveyContainer darkMode={darkMode} footerText={footerText}>
+    <SurveyContainer
+      initSlug={initSlug}
+      basepath={basepath}
+      darkMode={darkMode}
+      footerText={footerText}
+    >
       <SurveyQuestionContainer>
-        <SurveyQuestionText>{text}</SurveyQuestionText>
+        <SurveyQuestionText>{preparedText}</SurveyQuestionText>
         <SurveyQuestionInputSection>
-          {questionType === "choice" && !!variants && <QuestionChoices choices={variants} />}
-
+          {questionType === "choice" && !!variants && (
+            <QuestionChoices choices={variants} onSubmitQuestion={onSubmitQuestion} />
+          )}
+          {questionType === "date" && (
+            <QuestionDateSelection
+              nextSlug={question.nextSlug as string}
+              onSubmitQuestion={onSubmitQuestion}
+            />
+          )}
         </SurveyQuestionInputSection>
-        <SurveyQuestionSubmitSection>
-          <Button variant="gradient" fullWidth>Next</Button>
-        </SurveyQuestionSubmitSection>
       </SurveyQuestionContainer>
     </SurveyContainer>
   );

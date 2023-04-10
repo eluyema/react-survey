@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const SurveyContainerWrapper = styled.div<{ gradient: boolean }>`
-  height: 100vh;
+  min-height: 100vh;
   background: ${({ theme, gradient }) =>
     gradient ? theme.colors.backgroundBlueGradient : theme.colors.backgroundPink};
   display: flex;
@@ -43,12 +43,14 @@ const SurveyContainerFooter = styled.footer`
   padding: 10px 0;
 `;
 
-const SurveyContainerFooterRow = styled.h5`
+const SurveyContainerFooterRow = styled.h5<{ darkMode: boolean }>`
   max-width: 330px;
-  font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: 400;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.fontWeight.regular};
+  color: ${({ theme, darkMode }) =>
+    darkMode ? theme.colors.typographyMediumGray : theme.colors.typographyDarkGray};
   line-height: 140%;
+  white-space: pre-wrap;
   text-align: center;
 `;
 

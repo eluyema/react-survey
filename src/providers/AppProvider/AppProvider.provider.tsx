@@ -1,12 +1,15 @@
 import React from "react";
 import ThemeProvider from "@/providers/ThemeProvider/ThemeProvider.provider";
+import ReduxProvider from "../ReduxProvider/ReduxProvider.provider";
 
 interface AppProviderProps {
   children: React.ReactNode;
 }
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
-  <ThemeProvider>{children}</ThemeProvider>
+  <ReduxProvider>
+    <ThemeProvider>{children}</ThemeProvider>
+  </ReduxProvider>
 );
 
 export default AppProvider;

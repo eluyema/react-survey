@@ -5,12 +5,24 @@ interface ThemeColors {
   backgroundTransparentDarkGrey: string;
   backgroundLightGrey: string;
   backgroundMediumGrey: string;
+  backgroundWhite: string;
+  borderLightBlue: string;
   borderLightGrey: string;
+  borderMeiumGrey: string;
   shadowLightGrey: string;
   shadowMediumGrey: string;
   black: string;
-  typographyBlack: string;
+  typographyDarkBlack: string;
+  typographyMediumBlack: string;
+  typographyLightBlack: string;
   typographyWhite: string;
+  typographyMediumGray: string;
+  typographyDarkGray: string;
+  typographyViolet: string;
+  typographyRed: string;
+  link: string;
+  linkActive: string;
+  linkVisited: string;
 }
 
 export type { ThemeColors };

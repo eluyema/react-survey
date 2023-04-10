@@ -1,25 +1,29 @@
 import React from "react";
 import SurveyQuestion from "@/features/activeSurvey/components/SurveyQuestion/SurveyQuestion.feature";
 import { SurveyQuestionData } from "@/common/types/survey/SurveyQuestionData";
+import { useNavigate } from "react-router-dom";
+import { moveOnStage } from "@/features/activeSurvey/activeSurveySlice";
+import { useDispatch } from "react-redux";
+import { slugs } from "@/common/constants/slugs.contant";
+import { basePathnames } from "@/common/constants/pathnames.constant";
 
 const question: SurveyQuestionData = {
   stageId: "1",
+  slug: slugs.relationshipsWithAstrology.init,
   questionType: "choice",
   necessaryAttributes: [],
-  necessaryPassedStages: [],
+  possibleParentStages: [],
   modifiableAttributes: ["gender"],
   text: "Select your gender:",
   variants: [
     {
       value: "female",
-      attributes: { gender: "Female" },
-      nextStageSlug: "date-of-birth",
+      nextStageSlug: slugs.relationshipsWithAstrology.dateOfBirth,
       displayText: "Female",
     },
     {
       value: "male",
-      attributes: { gender: "Male" },
-      nextStageSlug: "date-of-birth",
+      nextStageSlug: slugs.relationshipsWithAstrology.dateOfBirth,
       displayText: "Male",
     },
   ],
@@ -30,7 +34,35 @@ const question: SurveyQuestionData = {
 };
 
 const GenderQuestionScena = () => {
-  return <SurveyQuestion question={question} />;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onSubmitQuestion = (value: unknown, nextSlug: string) => {
+    if (typeof value !== "string") {
+      return;
+    }
+
+    const action = moveOnStage({
+      stageId: question.stageId,
+      slug: question.slug,
+      isQuestion: true,
+      value,
+      attributes: { gender: value },
+      modifiedAttributes: question.modifiableAttributes,
+    });
+
+    dispatch(action);
+    navigate(`${basePathnames.relationshipsWithAstrology}/${nextSlug}`, { replace: true });
+  };
+  return (
+    <SurveyQuestion
+      basepath={basePathnames.relationshipsWithAstrology}
+      initSlug={slugs.relationshipsWithAstrology.init}
+      question={question}
+      preparedText={question.text}
+      onSubmitQuestion={onSubmitQuestion}
+    />
+  );
 };
 
 export default GenderQuestionScena;

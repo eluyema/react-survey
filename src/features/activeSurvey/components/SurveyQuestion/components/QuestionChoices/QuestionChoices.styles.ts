@@ -7,4 +7,8 @@ const QuestionChoicesSection = styled.div`
   width: 100%;
 `;
 
-export { QuestionChoicesSection };
+const QuestionChoiceText = styled.p`
+  padding: 8px 0;
+`;
+
+export { QuestionChoicesSection, QuestionChoiceText };

@@ -5,7 +5,7 @@ const buttonVariant = {
   regular: "regular",
   darkModeOutlined: "dark-mode-outlined",
   darkModeContained: "dark-mode-contained",
-}
+};
 
 const buttonFontSize = {
   gradient: "small",
@@ -20,7 +20,7 @@ const Button = styled.button<{
 }>`
   cursor: pointer;
   border: none;
-  padding: 10px 14px;
+  padding: 14px 10px;
   text-align: center;
   border-radius: 16px;
   width: ${({ fullWidth = false }) => (fullWidth ? "100%" : "auto")};
@@ -33,9 +33,9 @@ const Button = styled.button<{
       case buttonVariant.regular:
         return theme.colors.black;
       case buttonVariant.darkModeOutlined:
-        return "brown";
+        return theme.colors.typographyWhite;
       case buttonVariant.darkModeContained:
-        return "yellow";
+        return theme.colors.typographyViolet;
     }
   }};
 
@@ -58,17 +58,17 @@ const Button = styled.button<{
       case buttonVariant.regular:
         return theme.colors.backgroundLightGrey;
       case buttonVariant.darkModeOutlined:
-        return "brown";
+        return "transparent";
       case buttonVariant.darkModeContained:
-        return "yellow";
+        return theme.colors.backgroundWhite;
     }
   }};
   border: ${({ theme, variant = buttonVariant.regular }) => {
     switch (variant) {
-      case buttonVariant.gradient:
-        return "red";
       case buttonVariant.regular:
         return `1px solid ${theme.colors.borderLightGrey}`;
+      case buttonVariant.darkModeOutlined:
+        return `1px solid ${theme.colors.backgroundWhite}`;
       default:
         return "none";
     }
@@ -92,9 +92,9 @@ const Button = styled.button<{
         case buttonVariant.regular:
           return theme.colors.backgroundMediumGrey;
         case buttonVariant.darkModeOutlined:
-          return "brown";
+          return "transparent";
         case buttonVariant.darkModeContained:
-          return "yellow";
+          return theme.colors.backgroundWhite;
       }
     }};
     transform: translateY(-1px);
@@ -109,9 +109,9 @@ const Button = styled.button<{
         case buttonVariant.regular:
           return theme.colors.backgroundLightGrey;
         case buttonVariant.darkModeOutlined:
-          return "brown";
+          return "transparent";
         case buttonVariant.darkModeContained:
-          return "yellow";
+          return theme.colors.backgroundWhite;
       }
     }};
   }

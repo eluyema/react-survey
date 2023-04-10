@@ -1,5 +1,4 @@
 interface ThemeFontSizes {
-  xxs: string;
   xs: string;
   sm: string;
   md: string;

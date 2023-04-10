@@ -1,10 +1,11 @@
 interface SurveyStageData {
   stageId: string;
-  necessaryPassedStages: string[];
-  backStageSlug?: string;
+  slug: string;
   necessaryAttributes: string[];
   modifiableAttributes: string[];
+  possibleParentStages: string[];
   text: string;
+  nextSlug?: string;
   footerText?: string | string[];
 }
 
