@@ -14,7 +14,7 @@ const question: SurveyQuestionData = {
   necessaryAttributes: [],
   possibleParentStages: ["3"],
   modifiableAttributes: ["parent"],
-  text: "Are single you parent?",
+  text: "Are you a single parent?",
   variants: [
     {
       value: "true",
